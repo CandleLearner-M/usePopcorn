@@ -1,0 +1,173 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #232323;
+  color: white;
+  margin: 10px 15px;
+  padding: 0 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar h1 {
+  font-size: 1.5rem;
+}
+
+.navbar form input {
+  padding: 9px;
+
+  background-color: #ffffff20;
+
+  border-radius: 5px;
+  color: white;
+
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+
+  width: 35vw;
+  margin: 0 10px;
+  border: unset;
+  outline: none;
+}
+
+.navbar span {
+  font-size: 14px;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  width: 90%;
+  max-width: 1000px;
+
+  gap: 20px;
+  color: white;
+  margin: 10px auto;
+  margin-top: 20px;
+
+  min-height: 84vh;
+}
+
+.films,
+.watchList {
+  background-color: #3d3d3d;
+  border-radius: 8px;
+}
+
+.films {
+  position: relative;
+}
+
+ .button {
+  position: absolute;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 10px;
+  top: 10px;
+  font-size: 1.3rem;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: #232323;
+  padding: 0;
+  margin: 0;
+}
+
+.films .button span {
+  display: inline-block;
+}
+
+.movie {
+  display: flex;
+  gap: 10px;
+  border-radius: 8px;
+}
+
+.row {
+  padding: 18px 30px;
+  flex-direction: row;
+  align-items: center;
+}
+
+.column {
+  flex-direction: column;
+  align-items: left;
+}
+
+.movie:hover {
+  background-color: #706e6e;
+  cursor: pointer;
+}
+
+.movie .title {
+  display: flex;
+  flex-direction: column;
+}
+
+.movie .title h3 {
+  font-size: 0.9rem;
+  margin: 5px 10px;
+}
+
+.movie .title p {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+
+  font-size: 14px;
+  margin: 5px 10px;
+}
+.movie .poster {
+  height: 70px;
+}
+
+hr {
+  width: 95%;
+  border: 1px solid #ffffff20;
+  margin: 0 auto;
+}
+
+.watchList h1 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+}
+
+.watch-list-info {
+  padding: 20px;
+}
+
+.gap-20 {
+  gap: 20px;
+}
+
+
+
+.watch-list-info-details {
+  justify-content: space-between;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mg-l-0 {
+  margin-left: 0 !important;
+}
+
+
+.watchList .title {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  align-items: start;
+}
+
+.relative {
+  position: relative;
+}
