@@ -6,8 +6,9 @@ export function NavBar() {
   return (
     <nav className="navbar">
       <h1>🍿 usePopcorn</h1>
+
       <SearchForm searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <Results />
+      <NumResults />
     </nav>
   );
 }
@@ -31,7 +32,7 @@ function SearchForm({ searchQuery, setSearchQuery }: SearchFormProps) {
   );
 }
 
-function Results() {
+function NumResults() {
   return (
     <p>
       Found
