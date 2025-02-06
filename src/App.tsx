@@ -3,6 +3,13 @@ import Main from "./Main.1";
 import { NavBar } from "./NavBar";
 import { useState } from "react";
 import { Movie } from "./types";
+import { SearchForm } from "./SearchForm";
+import { NumResults } from "./NumResults";
+import MovieResults from "./MovieResults";
+import MoviesList from "./MoviesList";
+import WatchedMovies from "./WatchedMovies";
+import WatchListInfo from "./WatchListInfo";
+import WatchedMoviesList from "./WatchedMoviesList";
 
 const tempMovieData = [
   {
@@ -28,9 +35,33 @@ const tempMovieData = [
   },
 ];
 
+const tempWatchedData = [
+  {
+    imdbID: "tt1375666",
+    Title: "Inception",
+    Year: "2010",
+    Poster:
+      "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
+    runtime: 148,
+    imdbRating: 8.8,
+    userRating: 10,
+  },
+  {
+    imdbID: "tt0088763",
+    Title: "Back to the Future",
+    Year: "1985",
+    Poster:
+      "https://m.media-amazon.com/images/M/MV5BZmU0M2Y1OGUtZjIxNi00ZjBkLTg1MjgtOWIyNThiZWIwYjRiXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
+    runtime: 116,
+    imdbRating: 8.5,
+    userRating: 9,
+  },
+];
+
 export default function App() {
   const [movies, setMovies] = useState<Movie[]>(tempMovieData);
   const [searchQuery, setSearchQuery] = useState("");
+  const [watchedMovies, setWatchedMovies] = useState<Movie[]>(tempWatchedData);
 
   return (
     <>
@@ -38,42 +69,16 @@ export default function App() {
         <SearchForm searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         <NumResults resultsCount={movies.length} />
       </NavBar>
-      <Main movies={movies} />
+      <Main>
+        <MovieResults>
+          <MoviesList movies={movies} />
+        </MovieResults>
+
+        <WatchedMovies>
+          <WatchListInfo watchedMovies={watchedMovies} />
+          <WatchedMoviesList watchedMovies={watchedMovies} />
+        </WatchedMovies>
+      </Main>
     </>
-  );
-}
-
-
-type SearchFormProps = {
-  searchQuery: string;
-  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-};
-
-function SearchForm({ searchQuery, setSearchQuery }: SearchFormProps) {
-  return (
-    <form role="search" className="search-form">
-      <input
-        type="search"
-        name="searchMovie"
-        id="searchBar"
-        placeholder="Search movies..."
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
-    </form>
-  );
-}
-
-type NumResultsProps = {
-  resultsCount: number;
-};
-
-function NumResults({ resultsCount }: NumResultsProps) {
-  return (
-    <p>
-      Found
-      <strong> {resultsCount} </strong>
-      results
-    </p>
   );
 }
