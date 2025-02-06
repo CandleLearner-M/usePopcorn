@@ -56,26 +56,41 @@
   border-radius: 8px;
 }
 
+.light-grey {
+  background-color: #4f4f4f;
+}
+.light-grey:hover {
+  background-color: #4f4f4f !important;
+
+}
+
+.cursor-unset {
+  cursor: unset !important;
+}
+
+.cursor-unset:hover {
+  background-color: #4f4f4f !important;
+} 
+
 .films {
   position: relative;
 }
 
- .button {
+.button {
   position: absolute;
+  top: 10px;
+  right: 10px;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 12px;
+  height: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
-  right: 10px;
-  top: 10px;
-  font-size: 1.3rem;
-  font-weight: 500;
-  cursor: pointer;
   background-color: #232323;
-  padding: 0;
-  margin: 0;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 0.65rem;
 }
 
 .films .button span {
@@ -147,8 +162,6 @@ hr {
   gap: 20px;
 }
 
-
-
 .watch-list-info-details {
   justify-content: space-between;
   list-style-type: none;
@@ -160,7 +173,6 @@ hr {
   margin-left: 0 !important;
 }
 
-
 .watchList .title {
   display: flex;
   gap: 10px;
@@ -170,4 +182,10 @@ hr {
 
 .relative {
   position: relative;
+}
+
+
+.letter-spacing-unset {
+  letter-spacing: normal !important;
+  ;
 }
