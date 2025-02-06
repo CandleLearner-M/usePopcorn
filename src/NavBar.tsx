@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-export function NavBar() {
+type NavBarProps = {
+  resultsCount: number;
+};
+
+export function NavBar({ resultsCount }: NavBarProps) {
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
@@ -8,7 +12,7 @@ export function NavBar() {
       <h1>🍿 usePopcorn</h1>
 
       <SearchForm searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <NumResults />
+      <NumResults resultsCount={resultsCount} />
     </nav>
   );
 }
@@ -32,11 +36,15 @@ function SearchForm({ searchQuery, setSearchQuery }: SearchFormProps) {
   );
 }
 
-function NumResults() {
+type NumResultsProps = {
+  resultsCount: number;
+};
+
+function NumResults({ resultsCount }: NumResultsProps) {
   return (
     <p>
       Found
-      <strong> 3 </strong>
+      <strong> {resultsCount} </strong>
       results
     </p>
   );
