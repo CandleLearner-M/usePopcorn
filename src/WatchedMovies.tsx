@@ -3,6 +3,12 @@ import { Fragment } from "react/jsx-runtime";
 import IconButton from "./Buttons";
 import { Movie } from "./types";
 
+const average = function (arr: (number | undefined)[]) {
+  const validNumber = arr.filter((num): num is number => num !== undefined);
+  if (validNumber.length === 0) return 0;
+  return validNumber.reduce((acc, num) => acc + num, 0) / validNumber.length;
+};
+
 type WatchedMoviesProps = {
   watchedMovies: Movie[];
 };
@@ -17,7 +23,7 @@ function WatchedMovies({ watchedMovies }: WatchedMoviesProps) {
         type={isOpenWatchedModal ? "minus" : "plus"}
         onClick={onToggleWatchedModal}
       />
-      <WatchListInfo />
+      <WatchListInfo watchedMovies={watchedMovies}/>
 
       {isOpenWatchedModal &&
         watchedMovies.map((movie) => (
@@ -27,15 +33,26 @@ function WatchedMovies({ watchedMovies }: WatchedMoviesProps) {
   );
 }
 
-function WatchListInfo() {
+type WatchListInfoProps = {
+  watchedMovies: Movie[];
+}
+
+function WatchListInfo({ watchedMovies }: WatchListInfoProps) {
+  const watchListLength = watchedMovies.length;
+  const avgUserRating = average(watchedMovies.map((movie) => movie.userRating));
+  const avgImdbRating = average(watchedMovies.map((movie) => movie.imdbRating));
+  const totalRuntime = watchedMovies.reduce(
+    (acc, movie) => acc + (movie?.runtime || 0),
+    0
+  );
   return (
     <div className="movie watch-list-info column light-grey cursor-unset">
       <h1>Movies you watched</h1>
       <ul className="watch-list-info-details movie row cursor-unset gap-20">
-        <li>#️⃣ 0 movies</li>
-        <li>⭐️ 0.00s</li>
-        <li>🌟 0.00</li>
-        <li>⏳ 0 min</li>
+        <li>#️⃣ {watchListLength} movies</li>
+        <li>⭐️ {avgImdbRating}s</li>
+        <li>🌟 {avgUserRating}</li>
+        <li>⏳ {totalRuntime} min</li>
       </ul>
     </div>
   );
@@ -69,6 +86,5 @@ function WatchedMovie({ movie }: { movie: Movie }) {
     </Fragment>
   );
 }
-
 
 export default WatchedMovies;

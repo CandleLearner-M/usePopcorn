@@ -18,33 +18,33 @@ function MovieResults({ movies }: MovieResultsProps) {
         onClick={onToggleMovieModal}
       />
       {isOpenMovieModal &&
-        movies.map((movie) => (
-          <Film key={movie.imdbID} movie={movie} />
-        ))}
+        movies.map((movie) => <Film key={movie.imdbID} movie={movie} />)}
     </div>
   );
 }
 
 type FilmProps = {
   movie: Movie;
-}
+};
 
-function Film ({movie}: FilmProps) {
+function Film({ movie }: FilmProps) {
+  const { imdbID, Title, Poster, Year } = movie;
+
   return (
-    <Fragment key={movie.imdbID}>
-            <div className="movie row">
-              <img src={movie.Poster} alt={movie.Title} className="poster" />
-              <div className="title">
-                <h3>{movie.Title}</h3>
-                <p>
-                  <span>📅</span>
-                  <span>{movie.Year}</span>
-                </p>
-              </div>
-            </div>
-            <hr />
-          </Fragment>
-  )
+    <Fragment key={imdbID}>
+      <div className="movie row">
+        <img src={Poster} alt={Title} className="poster" />
+        <div className="title">
+          <h3>{Title}</h3>
+          <p>
+            <span>📅</span>
+            <span>{Year}</span>
+          </p>
+        </div>
+      </div>
+      <hr />
+    </Fragment>
+  );
 }
 
 export default MovieResults;

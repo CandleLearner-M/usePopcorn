@@ -50,7 +50,7 @@ const tempWatchedData = [
   },
 ];
 
-function Main() {
+export default function Main() {
   const [movies, setMovies] = useState<Movie[]>(tempMovieData);
   const [watchedMovies, setWatchedMovies] = useState<Movie[]>(tempWatchedData);
 
@@ -63,4 +63,3 @@ function Main() {
 }
 
 
-export default Main;
