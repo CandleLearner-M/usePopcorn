@@ -1,6 +1,7 @@
-import { Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import IconButton from "./Buttons";
+import WatchedMovies from "./WatchedMovies";
+import { Movie } from "./types";
+import MovieResults from "./MovieResults";
 
 const tempMovieData = [
   {
@@ -49,118 +50,17 @@ const tempWatchedData = [
   },
 ];
 
-type Movie = {
-  imdbID: string;
-  Title: string;
-  Year: string;
-  Poster: string;
-  runtime?: number;
-  imdbRating?: number;
-  userRating?: number;
-};
-export function Main() {
+function Main() {
   const [movies, setMovies] = useState<Movie[]>(tempMovieData);
   const [watchedMovies, setWatchedMovies] = useState<Movie[]>(tempWatchedData);
 
   return (
     <main className="main">
       <MovieResults movies={movies} />
-      <WatchedMovies watchedMovies={watchedMovies} />
+      <WatchedMovies  watchedMovies={watchedMovies} />
     </main>
   );
 }
 
-type MovieResultsProps = {
-  movies: Movie[];
-};
 
-function MovieResults({ movies }: MovieResultsProps) {
-  const [isOpenMovieModal, setIsOpenMovieModal] = useState(true);
-  const onToggleMovieModal = () => setIsOpenMovieModal((isOpen) => !isOpen);
-
-  return (
-    <div className="films">
-      <IconButton
-        type={isOpenMovieModal ? "minus" : "plus"}
-        onClick={onToggleMovieModal}
-      />
-      {isOpenMovieModal &&
-        movies.map((movie) => (
-          <Fragment key={movie.imdbID}>
-            <div className="movie row">
-              <img src={movie.Poster} alt={movie.Title} className="poster" />
-              <div className="title">
-                <h3>{movie.Title}</h3>
-                <p>
-                  <span>📅</span>
-                  <span>{movie.Year}</span>
-                </p>
-              </div>
-            </div>
-            <hr />
-          </Fragment>
-        ))}
-    </div>
-  );
-}
-
-type WatchedMoviesProps = {
-  watchedMovies: Movie[];
-};
-
-function WatchedMovies({ watchedMovies }: WatchedMoviesProps) {
-  const [isOpenWatchedModal, setIsOpenWatchedModal] = useState(true);
-  const onToggleWatchedModal = () => setIsOpenWatchedModal((isOpen) => !isOpen);
-
-  return (
-    <div className="watchList relative">
-      <IconButton
-        type={isOpenWatchedModal ? "minus" : "plus"}
-        onClick={onToggleWatchedModal}
-      />
-      <div className="movie watch-list-info column light-grey cursor-unset">
-        <h1>Movies you watched</h1>
-        <ul className="watch-list-info-details movie row cursor-unset gap-20">
-          <li>#️⃣ 0 movies</li>
-          <li>⭐️ 0.00s</li>
-          <li>🌟 0.00</li>
-          <li>⏳ 0 min</li>
-        </ul>
-      </div>
-
-      {isOpenWatchedModal &&
-        watchedMovies.map((movie) => (
-          <WatchedMovie key={movie.imdbID} movie={movie} />
-        ))}
-    </div>
-  );
-}
-
-function WatchedMovie({ movie }: { movie: Movie }) {
-  const { imdbID, Title, Poster, runtime, imdbRating, userRating } = movie;
-  return (
-    <Fragment key={imdbID}>
-      <div className="movie row gap-20">
-        <img src={Poster} alt={Title} className="poster" />
-        <div className="title flex space-between">
-          <h3 className="mg-l-0 mg-b-10">{Title}</h3>
-          <ul className="movie row watch-list-info-details gap-20 ">
-            <li>
-              <span>⏳</span>
-              <span>{runtime} min</span>
-            </li>
-            <li>
-              <span>🌟</span>
-              <span>{imdbRating}</span>
-            </li>
-            <li>
-              <span>⭐️</span>
-              <span>{userRating}</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <hr />
-    </Fragment>
-  );
-}
+export default Main;

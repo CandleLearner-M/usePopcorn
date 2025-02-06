@@ -61,7 +61,6 @@
 }
 .light-grey:hover {
   background-color: #4f4f4f !important;
-
 }
 
 .cursor-unset {
@@ -70,7 +69,7 @@
 
 .cursor-unset:hover {
   background-color: #4f4f4f !important;
-} 
+}
 
 .films {
   position: relative;
@@ -156,6 +155,7 @@ hr {
 
 .watch-list-info {
   padding: 20px;
+  height: 107.6px;
 }
 
 .gap-20 {
@@ -184,8 +184,6 @@ hr {
   position: relative;
 }
 
-
 .letter-spacing-unset {
   letter-spacing: normal !important;
-  ;
 }
