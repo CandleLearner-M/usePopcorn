@@ -30,11 +30,50 @@ const tempMovieData = [
 
 export default function App() {
   const [movies, setMovies] = useState<Movie[]>(tempMovieData);
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <>
-      <NavBar resultsCount={movies.length} />
+      <NavBar>
+        <SearchForm searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        <NumResults resultsCount={movies.length} />
+      </NavBar>
       <Main movies={movies} />
     </>
+  );
+}
+
+
+type SearchFormProps = {
+  searchQuery: string;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+};
+
+function SearchForm({ searchQuery, setSearchQuery }: SearchFormProps) {
+  return (
+    <form role="search" className="search-form">
+      <input
+        type="search"
+        name="searchMovie"
+        id="searchBar"
+        placeholder="Search movies..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+    </form>
+  );
+}
+
+type NumResultsProps = {
+  resultsCount: number;
+};
+
+function NumResults({ resultsCount }: NumResultsProps) {
+  return (
+    <p>
+      Found
+      <strong> {resultsCount} </strong>
+      results
+    </p>
   );
 }
