@@ -2,7 +2,6 @@ import { useState } from "react";
 import IconButton from "./Buttons";
 
 interface WatchedMoviesProps {
-  children: [React.ReactNode, React.ReactNode];
 }
 
 function WatchedMovies({ children }: WatchedMoviesProps) {
@@ -10,7 +9,7 @@ function WatchedMovies({ children }: WatchedMoviesProps) {
   const onToggleWatchedModal = () => setIsOpenWatchedModal((isOpen) => !isOpen);
 
   return (
-    <div className="watchList relative">
+    <div className="">
       <IconButton
         type={isOpenWatchedModal ? "minus" : "plus"}
         onClick={onToggleWatchedModal}

@@ -4,7 +4,7 @@ import { Movie } from "./types";
 export default function MoviesList({ movies }: { movies: Movie[] }) {
   return movies.map((movie) => <Film key={movie.imdbID} movie={movie} />);
 }
-type FilmProps = {
+interface FilmProps {
   movie: Movie;
 };
 function Film({ movie }: FilmProps) {

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Movie } from "./types";
 import { SearchForm } from "./SearchForm";
 import { NumResults } from "./NumResults";
-import MovieResults from "./MovieResults";
+import Box from "./Box";
 import MoviesList from "./MoviesList";
 import WatchedMovies from "./WatchedMovies";
 import WatchListInfo from "./WatchListInfo";
@@ -70,14 +70,15 @@ export default function App() {
         <NumResults resultsCount={movies.length} />
       </NavBar>
       <Main>
-        <MovieResults>
+        <Box className="films">
+          {null}
           <MoviesList movies={movies} />
-        </MovieResults>
+        </Box>
 
-        <WatchedMovies>
+        <Box className="watchList relative">
           <WatchListInfo watchedMovies={watchedMovies} />
           <WatchedMoviesList watchedMovies={watchedMovies} />
-        </WatchedMovies>
+        </Box>
       </Main>
     </>
   );
