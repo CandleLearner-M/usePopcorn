@@ -7,31 +7,38 @@ import { CSSProperties } from "react";
 const containerStyle = {
   display: "flex",
   alignItems: "center",
-  gap: "15px",
+  height: 100,
+  gap: "20px",
 };
 
 const startContainerStyle = {
   display: "flex",
-  gap: "5px",
+  gap: "3px",
 };
 
 const textStyle = {
   lineHeight: "1",
   margin: "0",
-};
+} satisfies CSSProperties;
 
 interface StarRatingProps {
   maxRating?: number;
   color?: string;
-  size?: string;
+  size?: number;
+  className?: string;
+  messages?: string[];
+  defaultRating?: number;
 }
 
 function StarRating({
   maxRating = 5,
   color = "#fcc419",
-  size = "25px",
+  size = 30,
+  className = "",
+  messages = [],
+  defaultRating = 0
 }: StarRatingProps) {
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(defaultRating);
   const [hoverRating, setHoverRating] = useState(0);
 
   const handleHover = function (num: number) {
@@ -39,7 +46,7 @@ function StarRating({
   };
 
   return (
-    <div style={containerStyle}>
+    <div style={containerStyle} className={className}>
       <div style={{ ...startContainerStyle, color, fontSize: size }}>
         {Array.from({ length: maxRating }, (_, index) => (
           <Star
@@ -53,24 +60,18 @@ function StarRating({
           />
         ))}
       </div>
-      <p style={textStyle}>{hoverRating || rating || ""}</p>
+      <p style={{ ...textStyle, color, fontSize: `${size}px` }}>
+        {messages.length === maxRating
+          ? messages[hoverRating - 1] || messages[rating - 1 ]
+          : hoverRating || rating || ""}
+      </p>
     </div>
   );
 }
 
 const starStyle = {
-  position: "relative",
-  width: "25px",
-  height: "25px",
   display: "block",
   cursor: "pointer",
-} satisfies CSSProperties;
-
-const iconStyle = {
-  position: "absolute",
-  top: "0",
-  left: "0",
-  transition: "opacity 0.1s ease",
 } satisfies CSSProperties;
 
 interface StarProps {
@@ -88,14 +89,7 @@ function Star({ onRate, isFilled, onHoverIn, onHoverOut }: StarProps) {
       onMouseEnter={onHoverIn}
       onMouseLeave={onHoverOut}
     >
-      <FontAwesomeIcon
-        icon={faStar}
-        style={{ ...iconStyle, opacity: isFilled ? 0 : 1 }}
-      />
-      <FontAwesomeIcon
-        icon={faStarFilled}
-        style={{ ...iconStyle, opacity: isFilled ? 1 : 0 }}
-      />
+      <FontAwesomeIcon icon={isFilled ? faStarFilled : faStar} />
     </span>
   );
 }
