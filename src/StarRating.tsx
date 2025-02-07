@@ -21,10 +21,16 @@ const textStyle = {
 };
 
 interface StarRatingProps {
-  maxRating: number;
+  maxRating?: number;
+  color?: string;
+  size?: string;
 }
 
-function StarRating({ maxRating = 5 }: StarRatingProps) {
+function StarRating({
+  maxRating = 5,
+  color = "#fcc419",
+  size = "25px",
+}: StarRatingProps) {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
 
@@ -34,7 +40,7 @@ function StarRating({ maxRating = 5 }: StarRatingProps) {
 
   return (
     <div style={containerStyle}>
-      <div style={startContainerStyle}>
+      <div style={{ ...startContainerStyle, color, fontSize: size }}>
         {Array.from({ length: maxRating }, (_, index) => (
           <Star
             key={index}
@@ -54,8 +60,6 @@ function StarRating({ maxRating = 5 }: StarRatingProps) {
 
 const starStyle = {
   position: "relative",
-  color: "gold",
-  fontSize: "25px",
   width: "25px",
   height: "25px",
   display: "block",
