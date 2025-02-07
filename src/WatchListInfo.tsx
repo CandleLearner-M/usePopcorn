@@ -18,7 +18,7 @@ export default function WatchListInfo({ watchedMovies }: WatchListInfoProps) {
     0
   );
   return (
-    <div className="movie watch-list-info column light-grey cursor-unset">
+    <div className="movie watch-list-info column light-grey cursor-unset shadow">
       <h1>Movies you watched</h1>
       <ul className="watch-list-info-details movie row cursor-unset gap-20">
         <li>#️⃣ {watchListLength} movies</li>
