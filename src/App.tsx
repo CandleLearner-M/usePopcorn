@@ -10,6 +10,7 @@ import MoviesList from "./MoviesList";
 import WatchedMovies from "./WatchedMovies";
 import WatchListInfo from "./WatchListInfo";
 import WatchedMoviesList from "./WatchedMoviesList";
+import LoadingSpinner from "./LoadingSpinner";
 
 const tempMovieData = [
   {
@@ -65,20 +66,44 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [watchedMovies, setWatchedMovies] = useState<Movie[]>(tempWatchedData);
   const [isLoading, setIsLoading] = useState(false);
-  const query = "vincenzo";
+  const [loadingMsg, setLoadingMsg] = useState("Loading...");
 
   useEffect(() => {
-    setIsLoading(true);
     async function getMovies() {
-      const res = await fetch(
-        `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
-      );
-      const data = await res.json();
-      setMovies(data.Search);
-      setIsLoading(false);
+      setIsLoading(true);
+      setLoadingMsg("Loading...");
+      try {
+        const res = await fetch(
+          `http://www.omdbapi.com/?apikey=${KEY}&s=${searchQuery}`
+        );
+
+        if (!res.ok)
+          throw new Error("Something went wront with fetching movies");
+        const data = await res.json();
+
+        if (data.Response === 'False') {
+          setLoadingMsg("Movie Not Found");
+          return;
+        }
+        setMovies(data.Search);
+        console.log()
+        setIsLoading(false);
+      } catch (error) {
+        if (error instanceof Error) {
+          setLoadingMsg(error.message);
+        } else {
+          setLoadingMsg("An unkown error occured");
+        }
+      }
+    }
+
+    if (searchQuery.length < 3) {
+      setMovies([]);
+      setLoadingMsg('');
+      return;
     }
     getMovies();
-  }, []);
+  }, [searchQuery]);
 
   return (
     <>
@@ -89,7 +114,11 @@ export default function App() {
       <Main>
         <Box className="films">
           {null}
-          {isLoading ? <LoadingSpinner /> : <MoviesList movies={movies} />}
+          {isLoading ? (
+            <LoadingSpinner>{loadingMsg}</LoadingSpinner>
+          ) : (
+            <MoviesList movies={movies} />
+          )}
         </Box>
 
         <Box className="watchList relative">
