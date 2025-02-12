@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { KEY } from "./KEY";
+
 const temp = {
   imdbID: "tt1375666",
   Title: "Inception",
@@ -9,13 +12,71 @@ const temp = {
   userRating: 10,
 };
 
-export default function MovieDetails() {
-  const {imdbID, Title, Year, Poster, runtime, imdbRating, userRating} = temp;
+type MovieDetailsProps = {
+  selectedMovie: string;
+};
+
+interface MovieDetails {
+  Title: string;
+  Year: string;
+  Released: string;
+  Runtime: string;
+  Genre: string;
+  Director: string;
+  Actors: string;
+  Plot: string;
+  Poster: string;
+  imdbRating: string;
+  imdbID: string;
+  Ratings: Array<{
+    Source: string;
+    Value: string;
+  }>;
+}
+export default function MovieDetails({ selectedMovie }: MovieDetailsProps) {
+  const [movie, setMovie] = useState<MovieDetails | null>();
+
+  useEffect(() => {
+    async function getMovie() {
+      try {
+        if (!selectedMovie) return;
+        const res = await fetch(
+          `http://www.omdbapi.com/?apikey=${KEY}&i=${selectedMovie}`
+        );
+        const data = await res.json();
+        setMovie(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    getMovie();
+  }, [selectedMovie]);
+
+  if (!movie) return null;
+  const { Poster, Genre, imdbRating, Title, Runtime, Released } = movie;
   return (
     <div className="poster-details">
-      <div className="poster-details">
-        <img src={Poster} alt="" />
+      <div className="poster-title">
+        <img src={Poster} alt={Title} />
+        <div className="title-details">
+          <h2>{Title}</h2>
+
+          <div>
+            <p>{Released}</p>
+            <p>{Runtime}</p>
+          </div>
+          <div>
+            <p>{Genre}</p>
+          </div>
+          <div>
+            <p>⭐ {imdbRating} IMDB Rating</p>
+          </div>
+        </div>
       </div>
+      
+
+      
     </div>
-  )
+  );
 }

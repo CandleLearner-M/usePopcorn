@@ -213,3 +213,33 @@ hr {
 .pointer {
   cursor: pointer;
 }
+
+.poster-title {
+  display: flex;
+  height: 237px;
+  background-color: var(--color-fourth);
+  gap: 20px;
+
+}
+
+.poster-title img {
+  width: 160px
+}
+
+.title-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 0;
+}
+
+.title-details * {
+  margin: 0;
+  padding: 0;
+}
+
+.title-details div {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}

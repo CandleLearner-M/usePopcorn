@@ -12,6 +12,7 @@ import WatchedMoviesList from "./WatchedMoviesList";
 import LoadingSpinner from "./LoadingSpinner";
 import MovieDetails from "./MovieDetails";
 import Logo from "./Logo";
+import { KEY } from "./KEY";
 
 const tempMovieData = [
   {
@@ -60,8 +61,6 @@ const tempWatchedData = [
   },
 ];
 
-const KEY = "105ccc6b";
-
 export default function App() {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [movies, setMovies] = useState<Movie[]>(tempMovieData);
@@ -69,7 +68,7 @@ export default function App() {
   const [watchedMovies, setWatchedMovies] = useState<Movie[]>(tempWatchedData);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingMsg, setLoadingMsg] = useState("Loading...");
-  const [selectedMovie, setSelectedMove] = useState<string | null>("null");
+  const [selectedMovie, setSelectedMove] = useState<string | null>("tt1375666");
 
   useEffect(() => {
     async function getMovies() {
@@ -114,8 +113,7 @@ export default function App() {
   };
 
   useEffect(() => {
-      document.documentElement.setAttribute("data-theme", theme);
-    
+    document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
   return (
@@ -137,7 +135,7 @@ export default function App() {
         {selectedMovie ? (
           <Box className="film-list relative">
             {null}
-            <MovieDetails />
+            <MovieDetails selectedMovie={selectedMovie} />
           </Box>
         ) : (
           <Box className="film-list relative">
