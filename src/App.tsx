@@ -1,7 +1,7 @@
 import "./App.css";
 import Main from "./Main.1";
 import { NavBar } from "./NavBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Movie } from "./types";
 import { SearchForm } from "./SearchForm";
 import { NumResults } from "./NumResults";
@@ -58,10 +58,27 @@ const tempWatchedData = [
   },
 ];
 
+const KEY = "105ccc6b";
+
 export default function App() {
   const [movies, setMovies] = useState<Movie[]>(tempMovieData);
   const [searchQuery, setSearchQuery] = useState("");
   const [watchedMovies, setWatchedMovies] = useState<Movie[]>(tempWatchedData);
+  const [isLoading, setIsLoading] = useState(false);
+  const query = "vincenzo";
+
+  useEffect(() => {
+    setIsLoading(true);
+    async function getMovies() {
+      const res = await fetch(
+        `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
+      );
+      const data = await res.json();
+      setMovies(data.Search);
+      setIsLoading(false);
+    }
+    getMovies();
+  }, []);
 
   return (
     <>
@@ -72,7 +89,7 @@ export default function App() {
       <Main>
         <Box className="films">
           {null}
-          <MoviesList movies={movies} />
+          {isLoading ? <LoadingSpinner /> : <MoviesList movies={movies} />}
         </Box>
 
         <Box className="watchList relative">
