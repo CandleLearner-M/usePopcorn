@@ -1,15 +1,36 @@
+:root {
+  --color-primary: #121212;
+  --color-secondary: #3d3d3d;
+  --color-thertiary: #232323;
+  --color-fourth: #4f4f4f;
+  --text-color: #fff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='light'] {
+  --color-primary: #FBFBFB;
+  --color-secondary: #e1dbfd ;
+  --color-thertiary: #c8bef8;
+  --color-fourth: #E8F9FF;
+  --text-color: #000;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+} 
+
+body {
+  background-color: var(--color-primary);
+  color: var(--text-color);
+}
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  background-color: #232323;
-  color: white;
+  background-color: var(--color-thertiary);
+  color: var(--text-color);
   margin: 10px 15px;
   padding: 0 30px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px var(--shadow-color);
 }
 
 .navbar h1 {
@@ -18,14 +39,9 @@
 
 .navbar form input {
   padding: 9px;
-
-  background-color: #ffffff20;
-
+  background-color: var(--color-secondary);
   border-radius: 5px;
-  color: white;
-
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-
+  color: var(--text-color);
   width: 35vw;
   margin: 0 10px;
   border: unset;
@@ -39,29 +55,26 @@
 .main {
   display: grid;
   grid-template-columns: 1fr 1fr;
-
   width: 90%;
   max-width: 1000px;
-
   gap: 20px;
-  color: white;
+  color: var(--text-color);
   margin: 10px auto;
   margin-top: 20px;
-
   min-height: 84vh;
 }
 
-.films,
-.watchList {
-  background-color: #3d3d3d;
+.film-list {
+  background-color: var(--color-secondary);
   border-radius: 8px;
 }
 
 .light-grey {
-  background-color: #4f4f4f;
+  background-color: var(--color-fourth);
 }
+
 .light-grey:hover {
-  background-color: #4f4f4f !important;
+  background-color: var(--color-fourth) !important;
 }
 
 .cursor-unset {
@@ -69,10 +82,10 @@
 }
 
 .cursor-unset:hover {
-  background-color: #4f4f4f !important;
+  background-color: var(--color-fourth) !important;
 }
 
-.films {
+.relative {
   position: relative;
 }
 
@@ -86,8 +99,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #232323;
-  color: white;
+  background-color: var(--color-thertiary);
+  color: var(--text-color);
   border: none;
   cursor: pointer;
   font-size: 0.65rem;
@@ -115,7 +128,7 @@
 }
 
 .movie:hover {
-  background-color: #706e6e;
+  background-color: var(--color-fourth);
   cursor: pointer;
 }
 
@@ -133,17 +146,17 @@
   display: flex;
   flex-direction: row;
   gap: 5px;
-
   font-size: 14px;
   margin: 5px 10px;
 }
+
 .movie .poster {
   width: 45px;
 }
 
 hr {
   width: 95%;
-  border: 1px solid #ffffff20;
+  border: 1px solid var(--color-fourth);
   margin: 0 auto;
 }
 
@@ -190,5 +203,13 @@ hr {
 }
 
 .shadow {
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 15px var(--shadow-color);
+}
+
+.poster-details {
+  display: flex;
+  flex-direction: column;
+}
+.pointer {
+  cursor: pointer;
 }

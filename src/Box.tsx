@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import IconButton from "./Buttons";
 
 type BoxProps = {
@@ -9,6 +9,7 @@ type BoxProps = {
 function Box({ className, children }: BoxProps) {
   const [isOpen, setisOpen] = useState(true);
   const onToggleMovieModal = () => setisOpen((isOpen) => !isOpen);
+
 
   return (
     <div className={className}>

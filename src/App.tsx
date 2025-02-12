@@ -7,10 +7,11 @@ import { SearchForm } from "./SearchForm";
 import { NumResults } from "./NumResults";
 import Box from "./Box";
 import MoviesList from "./MoviesList";
-import WatchedMovies from "./WatchedMovies";
 import WatchListInfo from "./WatchListInfo";
 import WatchedMoviesList from "./WatchedMoviesList";
 import LoadingSpinner from "./LoadingSpinner";
+import MovieDetails from "./MovieDetails";
+import Logo from "./Logo";
 
 const tempMovieData = [
   {
@@ -62,11 +63,13 @@ const tempWatchedData = [
 const KEY = "105ccc6b";
 
 export default function App() {
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [movies, setMovies] = useState<Movie[]>(tempMovieData);
   const [searchQuery, setSearchQuery] = useState("");
   const [watchedMovies, setWatchedMovies] = useState<Movie[]>(tempWatchedData);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingMsg, setLoadingMsg] = useState("Loading...");
+  const [selectedMovie, setSelectedMove] = useState<string | null>("null");
 
   useEffect(() => {
     async function getMovies() {
@@ -81,12 +84,12 @@ export default function App() {
           throw new Error("Something went wront with fetching movies");
         const data = await res.json();
 
-        if (data.Response === 'False') {
+        if (data.Response === "False") {
           setLoadingMsg("Movie Not Found");
           return;
         }
         setMovies(data.Search);
-        console.log()
+        console.log(data.Search);
         setIsLoading(false);
       } catch (error) {
         if (error instanceof Error) {
@@ -99,20 +102,31 @@ export default function App() {
 
     if (searchQuery.length < 3) {
       setMovies([]);
-      setLoadingMsg('');
+      setLoadingMsg("");
       return;
     }
     getMovies();
   }, [searchQuery]);
 
+  const toggleTheme = function () {
+    if (theme === "dark") setTheme("light");
+    else setTheme("dark");
+  };
+
+  useEffect(() => {
+      document.documentElement.setAttribute("data-theme", theme);
+    
+  }, [theme]);
+
   return (
     <>
       <NavBar>
+        <Logo onChangeTheme={toggleTheme} />
         <SearchForm searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         <NumResults resultsCount={movies.length} />
       </NavBar>
       <Main>
-        <Box className="films">
+        <Box className="film-list relative">
           {null}
           {isLoading ? (
             <LoadingSpinner>{loadingMsg}</LoadingSpinner>
@@ -120,11 +134,17 @@ export default function App() {
             <MoviesList movies={movies} />
           )}
         </Box>
-
-        <Box className="watchList relative">
-          <WatchListInfo watchedMovies={watchedMovies} />
-          <WatchedMoviesList watchedMovies={watchedMovies} />
-        </Box>
+        {selectedMovie ? (
+          <Box className="film-list relative">
+            {null}
+            <MovieDetails />
+          </Box>
+        ) : (
+          <Box className="film-list relative">
+            <WatchListInfo watchedMovies={watchedMovies} />
+            <WatchedMoviesList watchedMovies={watchedMovies} />
+          </Box>
+        )}
       </Main>
     </>
   );
