@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { KEY } from "./KEY";
-import LoadingSpinner from "./LoadingSpinner";
-import StarRating from "./StarRating";
-import IconButton from "./Buttons";
-import { Movie } from "./types";
+import { KEY } from "../../KEY";
+import LoadingSpinner from "../../LoadingSpinner";
+import StarRating from "../../StarRating";
+import IconButton from "../../Buttons";
+import { Movie } from "../../types";
 
 type MovieDetailsProps = {
   selectedMovie: string;
@@ -31,7 +31,7 @@ interface MovieDetails {
 export default function MovieDetails({
   selectedMovie,
   onClose,
-  onAddWatchedMovie
+  onAddWatchedMovie,
 }: MovieDetailsProps) {
   const [movie, setMovie] = useState<MovieDetails | null>();
   const [isLoading, setIsLoading] = useState(false);

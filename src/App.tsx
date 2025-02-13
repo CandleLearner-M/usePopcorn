@@ -6,11 +6,11 @@ import { Movie } from "./types";
 import { SearchForm } from "./components/NavBar-components/SearchForm";
 import { NumResults } from "./components/NavBar-components/NumResults";
 import Box from "./Box";
-import MoviesList from "./MoviesList";
+import MoviesList from "./components/main-components/MoviesList";
 import WatchListInfo from "./WatchListInfo";
 import WatchedMoviesList from "./WatchedMoviesList";
 import LoadingSpinner from "./LoadingSpinner";
-import MovieDetails from "./MovieDetails";
+import MovieDetails from "./components/main-components/MovieDetails";
 import Logo from "./components/NavBar-components/Logo";
 import { KEY } from "./KEY";
 
@@ -67,14 +67,14 @@ export default function App() {
 
   const handleClose = function () {
     setSelectedMovie(null);
-  }
+  };
   const handleOpenMovie = function (id: string | null) {
-    setSelectedMovie(selectedId => selectedId === id ? null: id);
-  }
+    setSelectedMovie((selectedId) => (selectedId === id ? null : id));
+  };
 
   const handleAddWatchedMovie = function (movie: Movie) {
-    setWatchedMovies(watchedMovies => [...watchedMovies, movie]);
-  }
+    setWatchedMovies((watchedMovies) => [...watchedMovies, movie]);
+  };
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -93,13 +93,21 @@ export default function App() {
           {isLoading ? (
             <LoadingSpinner>{loadingMsg}</LoadingSpinner>
           ) : (
-            <MoviesList movies={movies} onMovieClick={handleOpenMovie} selectedMovie={selectedMovie} />
+            <MoviesList
+              movies={movies}
+              onMovieClick={handleOpenMovie}
+              selectedMovie={selectedMovie}
+            />
           )}
         </Box>
         {selectedMovie ? (
           <Box className="film-list relative">
             {null}
-            <MovieDetails selectedMovie={selectedMovie} onClose={handleClose} onAddWatchedMovie={handleAddWatchedMovie} />
+            <MovieDetails
+              selectedMovie={selectedMovie}
+              onClose={handleClose}
+              onAddWatchedMovie={handleAddWatchedMovie}
+            />
           </Box>
         ) : (
           <Box className="film-list relative">
