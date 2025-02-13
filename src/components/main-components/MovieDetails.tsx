@@ -37,7 +37,6 @@ export default function MovieDetails({
   const [isLoading, setIsLoading] = useState(false);
   const [rating, setRating] = useState(0);
 
-
   useEffect(() => {
     setIsLoading(true);
     async function getMovie() {
@@ -68,7 +67,20 @@ export default function MovieDetails({
     Plot: plot,
     Actors: actors,
     Director: director,
+    Year
   } = movie;
+
+  const handleBtnAdd = function () {
+    onAddWatchedMovie({
+      Title: title,
+      imdbID: selectedMovie,
+      Poster: poster,
+      Year,
+      imdbRating,
+      runtime,
+      userRating: rating,
+    });
+  };
   return isLoading ? (
     <LoadingSpinner>Loading...</LoadingSpinner>
   ) : (
@@ -95,7 +107,16 @@ export default function MovieDetails({
         </div>
 
         <div className="star-about">
-          <StarRating className="star" maxRating={10} size={20} rating={rating} setRating={setRating} />
+          <div className="star">
+            <StarRating
+              maxRating={10}
+              size={20}
+              rating={rating}
+              setRating={setRating}
+            />
+            <button className="btn-add" onClick={handleBtnAdd}>+ Add to list</button>
+          </div>
+
           <div>
             <p>
               <em>{plot}</em>

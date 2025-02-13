@@ -2,6 +2,7 @@ import { useState } from "react";
 import IconButton from "./Buttons";
 
 interface WatchedMoviesProps {
+  children: [React.ReactNode, React.ReactNode];
 }
 
 function WatchedMovies({ children }: WatchedMoviesProps) {

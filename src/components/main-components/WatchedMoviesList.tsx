@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { Movie } from "./types";
+import { Movie } from "./../common/types";
 
 export default function WatchedMoviesList({ watchedMovies }: { watchedMovies: Movie[] }) {
   return watchedMovies.map((movie) => (
@@ -17,7 +17,7 @@ function WatchedMovie({ movie }: { movie: Movie }) {
           <ul className="movie row watch-list-info-details gap-20 ">
             <li>
               <span>⏳</span>
-              <span>{runtime} min</span>
+              <span> {runtime}</span>
             </li>
             <li>
               <span>🌟</span>

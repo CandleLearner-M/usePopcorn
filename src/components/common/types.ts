@@ -3,7 +3,7 @@ export type Movie = {
   Title: string;
   Year: string;
   Poster: string;
-  runtime?: number;
-  imdbRating?: number;
+  runtime?: string;
+  imdbRating?: number | string;
   userRating?: number;
 };
