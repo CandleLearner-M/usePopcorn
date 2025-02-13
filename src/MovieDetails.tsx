@@ -3,10 +3,12 @@ import { KEY } from "./KEY";
 import LoadingSpinner from "./LoadingSpinner";
 import StarRating from "./StarRating";
 import IconButton from "./Buttons";
+import { Movie } from "./types";
 
 type MovieDetailsProps = {
   selectedMovie: string;
   onClose: () => void;
+  onAddWatchedMovie: (movie: Movie) => void;
 };
 
 interface MovieDetails {
@@ -29,6 +31,7 @@ interface MovieDetails {
 export default function MovieDetails({
   selectedMovie,
   onClose,
+  onAddWatchedMovie
 }: MovieDetailsProps) {
   const [movie, setMovie] = useState<MovieDetails | null>();
   const [isLoading, setIsLoading] = useState(false);

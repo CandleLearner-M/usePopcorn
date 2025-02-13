@@ -1,17 +1,17 @@
 import "./App.css";
-import Main from "./Main.1";
-import { NavBar } from "./NavBar";
+import Main from "./components/layout/Main.1";
+import { NavBar } from "./components/layout/NavBar";
 import { useEffect, useState } from "react";
 import { Movie } from "./types";
 import { SearchForm } from "./SearchForm";
-import { NumResults } from "./NumResults";
+import { NumResults } from "./components/NavBar-components/NumResults";
 import Box from "./Box";
 import MoviesList from "./MoviesList";
 import WatchListInfo from "./WatchListInfo";
 import WatchedMoviesList from "./WatchedMoviesList";
 import LoadingSpinner from "./LoadingSpinner";
 import MovieDetails from "./MovieDetails";
-import Logo from "./Logo";
+import Logo from "./components/NavBar-components/Logo";
 import { KEY } from "./KEY";
 
 export default function App() {
@@ -99,7 +99,7 @@ export default function App() {
         {selectedMovie ? (
           <Box className="film-list relative">
             {null}
-            <MovieDetails selectedMovie={selectedMovie} onClose={handleClose}  />
+            <MovieDetails selectedMovie={selectedMovie} onClose={handleClose} onAddWatchedMovie={handleAddWatchedMovie} />
           </Box>
         ) : (
           <Box className="film-list relative">
