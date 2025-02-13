@@ -1,15 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faMinus, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 type IconButtonProps = {
-  type: "plus" | "minus";
+  type: "plus" | "minus"| "arrow";
   onClick?: () => void;
+  className: string;
 }
 
-const IconButton = ({ type, onClick }: IconButtonProps) => {
+function IconButton  ({ type, onClick, className }: IconButtonProps) {
   return (
-    <button className="button" onClick={onClick}> 
-      <FontAwesomeIcon icon={type === "plus" ? faPlus : faMinus} />
+    <button className={className} onClick={onClick}> 
+      <FontAwesomeIcon icon={type === "plus" ? faPlus : type === "minus"? faMinus: faArrowLeft} />
     </button>
   );
 };

@@ -14,6 +14,7 @@ function Box({ className, children }: BoxProps) {
   return (
     <div className={className}>
       <IconButton
+      className="button"
         type={isOpen ? "minus" : "plus"}
         onClick={onToggleMovieModal}
       />

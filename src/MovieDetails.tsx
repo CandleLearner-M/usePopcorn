@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { KEY } from "./KEY";
 import LoadingSpinner from "./LoadingSpinner";
 import StarRating from "./StarRating";
+import IconButton from "./Buttons";
 
 type MovieDetailsProps = {
   selectedMovie: string;
+  onClose: () => void;
 };
 
 interface MovieDetails {
@@ -24,7 +26,10 @@ interface MovieDetails {
     Value: string;
   }>;
 }
-export default function MovieDetails({ selectedMovie }: MovieDetailsProps) {
+export default function MovieDetails({
+  selectedMovie,
+  onClose,
+}: MovieDetailsProps) {
   const [movie, setMovie] = useState<MovieDetails | null>();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -49,32 +54,34 @@ export default function MovieDetails({ selectedMovie }: MovieDetailsProps) {
 
   if (!movie) return null;
   const {
-    Poster,
-    Genre,
+    Poster: poster,
+    Genre: genre,
     imdbRating,
-    Title,
-    Runtime,
-    Released,
-    Plot,
-    Actors,
-    Director,
+    Title: title,
+    Runtime: runtime,
+    Released: released,
+    Plot: plot,
+    Actors: actors,
+    Director: director,
   } = movie;
   return isLoading ? (
     <LoadingSpinner>Loading...</LoadingSpinner>
   ) : (
     <>
       <div className="poster-details">
+        <IconButton type="arrow" className="back-arrow" onClick={onClose} />
         <div className="poster-title">
-          <img src={Poster} alt={Title} />
+          <img src={poster} alt={title} />
           <div className="title-details">
-            <h2>{Title}</h2>
+            <h2>{title}</h2>
 
             <div>
-              <p>{Released}</p>
-              <p>{Runtime}</p>
+              <p>{released}</p>
+              <p>&bull;</p>
+              <p>{runtime}</p>
             </div>
             <div>
-              <p>{Genre}</p>
+              <p>{genre}</p>
             </div>
             <div>
               <p>⭐ {imdbRating} IMDB Rating</p>
@@ -85,10 +92,12 @@ export default function MovieDetails({ selectedMovie }: MovieDetailsProps) {
         <div className="star-about">
           <StarRating className="star" maxRating={10} size={20} />
           <div>
-            <p>{Plot}</p>
+            <p>
+              <em>{plot}</em>
+            </p>
 
-            <p>Starring {Actors}</p>
-            <p>Directed by {Director}</p>
+            <p>Starring {actors}</p>
+            <p>Directed by {director}</p>
           </div>
         </div>
       </div>

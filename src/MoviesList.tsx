@@ -6,7 +6,8 @@ export default function MoviesList({
   onMovieClick,
 }: {
   movies: Movie[];
-  onMovieClick: (id: string) => void;
+  onMovieClick: (id: string | null) => void;
+  selectedMovie: string | null;
 }) {
   return movies.map((movie) => (
     <Film key={movie.imdbID} movie={movie} onClick={onMovieClick} />
@@ -14,7 +15,7 @@ export default function MoviesList({
 }
 interface FilmProps {
   movie: Movie;
-  onClick: (id: string) => void;
+  onClick: (id: string | null) => void;
 }
 function Film({ movie, onClick }: FilmProps) {
   const { Title, Poster, Year, imdbID } = movie;
