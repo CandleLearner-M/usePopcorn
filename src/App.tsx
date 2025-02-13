@@ -3,7 +3,7 @@ import Main from "./components/layout/Main.1";
 import { NavBar } from "./components/layout/NavBar";
 import { useEffect, useState } from "react";
 import { Movie } from "./types";
-import { SearchForm } from "./SearchForm";
+import { SearchForm } from "./components/NavBar-components/SearchForm";
 import { NumResults } from "./components/NavBar-components/NumResults";
 import Box from "./Box";
 import MoviesList from "./MoviesList";
