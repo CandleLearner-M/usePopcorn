@@ -244,3 +244,25 @@ hr {
   flex-direction: row;
   gap: 20px;
 }
+
+.star-about {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  gap: 15px;
+}
+
+.star {
+  background-color: var(--color-fourth);
+  height: 70px;
+  padding: 0 40px;
+  border-radius: 8px;
+  width: 350px;
+}
+
+.star-about p {
+  font-size: 15px;
+  width: 350px;
+}

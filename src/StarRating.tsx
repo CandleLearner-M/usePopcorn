@@ -7,7 +7,6 @@ import { CSSProperties } from "react";
 const containerStyle = {
   display: "flex",
   alignItems: "center",
-  height: 100,
   gap: "20px",
 };
 

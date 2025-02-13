@@ -3,17 +3,6 @@ import { KEY } from "./KEY";
 import LoadingSpinner from "./LoadingSpinner";
 import StarRating from "./StarRating";
 
-const temp = {
-  imdbID: "tt1375666",
-  Title: "Inception",
-  Year: "2010",
-  Poster:
-    "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
-  runtime: 148,
-  imdbRating: 8.8,
-  userRating: 10,
-};
-
 type MovieDetailsProps = {
   selectedMovie: string;
 };
@@ -59,7 +48,17 @@ export default function MovieDetails({ selectedMovie }: MovieDetailsProps) {
   }, [selectedMovie]);
 
   if (!movie) return null;
-  const { Poster, Genre, imdbRating, Title, Runtime, Released } = movie;
+  const {
+    Poster,
+    Genre,
+    imdbRating,
+    Title,
+    Runtime,
+    Released,
+    Plot,
+    Actors,
+    Director,
+  } = movie;
   return isLoading ? (
     <LoadingSpinner>Loading...</LoadingSpinner>
   ) : (
@@ -83,9 +82,14 @@ export default function MovieDetails({ selectedMovie }: MovieDetailsProps) {
           </div>
         </div>
 
-
         <div className="star-about">
-          <StarRating />
+          <StarRating className="star" maxRating={10} size={20} />
+          <div>
+            <p>{Plot}</p>
+
+            <p>Starring {Actors}</p>
+            <p>Directed by {Director}</p>
+          </div>
         </div>
       </div>
     </>
