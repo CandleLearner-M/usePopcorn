@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { KEY } from "../../KEY";
+import { KEY } from "../common/KEY";
 import LoadingSpinner from "../common/LoadingSpinner";
 import StarRating from "../common/StarRating";
 import IconButton from "../common/Buttons";
-import { Movie } from "../../types";
+import { Movie } from "../common/types";
 
 type MovieDetailsProps = {
   selectedMovie: string;

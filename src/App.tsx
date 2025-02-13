@@ -1,8 +1,8 @@
-import "./App.css";
+import "./styles/App.css";
 import Main from "./components/layout/Main.1";
 import { NavBar } from "./components/layout/NavBar";
 import { useEffect, useState } from "react";
-import { Movie } from "./types";
+import { Movie } from "./components/common/types";
 import { SearchForm } from "./components/NavBar-components/SearchForm";
 import { NumResults } from "./components/NavBar-components/NumResults";
 import Box from "./components/main-components/Box";
@@ -12,7 +12,7 @@ import WatchedMoviesList from "./components/main-components/WatchedMoviesList";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import MovieDetails from "./components/main-components/MovieDetails";
 import Logo from "./components/NavBar-components/Logo";
-import { KEY } from "./KEY";
+import { KEY } from "./components/common/KEY";
 
 export default function App() {
   const [theme, setTheme] = useState<"light" | "dark">("dark");

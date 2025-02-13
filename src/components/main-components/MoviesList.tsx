@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { Movie } from "../../types";
+import { Movie } from "../common/types";
 
 export default function MoviesList({
   movies,
