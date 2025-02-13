@@ -35,6 +35,8 @@ export default function MovieDetails({
 }: MovieDetailsProps) {
   const [movie, setMovie] = useState<MovieDetails | null>();
   const [isLoading, setIsLoading] = useState(false);
+  const [rating, setRating] = useState(0);
+
 
   useEffect(() => {
     setIsLoading(true);
@@ -93,7 +95,7 @@ export default function MovieDetails({
         </div>
 
         <div className="star-about">
-          <StarRating className="star" maxRating={10} size={20} />
+          <StarRating className="star" maxRating={10} size={20} rating={rating} setRating={setRating} />
           <div>
             <p>
               <em>{plot}</em>

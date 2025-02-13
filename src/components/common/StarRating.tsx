@@ -27,6 +27,8 @@ interface StarRatingProps {
   className?: string;
   messages?: string[];
   defaultRating?: number;
+  setRating: (rating: number) => void;
+  rating: number;
 }
 
 function StarRating({
@@ -35,9 +37,9 @@ function StarRating({
   size = 30,
   className = "",
   messages = [],
-  defaultRating = 0
+  rating,
+  setRating
 }: StarRatingProps) {
-  const [rating, setRating] = useState(defaultRating);
   const [hoverRating, setHoverRating] = useState(0);
 
   const handleHover = function (num: number) {
