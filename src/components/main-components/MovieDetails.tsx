@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { KEY } from "../../KEY";
-import LoadingSpinner from "../../LoadingSpinner";
-import StarRating from "../../StarRating";
-import IconButton from "../../Buttons";
+import LoadingSpinner from "../common/LoadingSpinner";
+import StarRating from "../common/StarRating";
+import IconButton from "../common/Buttons";
 import { Movie } from "../../types";
 
 type MovieDetailsProps = {

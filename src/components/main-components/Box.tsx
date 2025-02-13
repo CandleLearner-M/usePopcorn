@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import IconButton from "./Buttons";
+import IconButton from "../common/Buttons";
 
 type BoxProps = {
   children: [React.ReactNode, React.ReactNode];
