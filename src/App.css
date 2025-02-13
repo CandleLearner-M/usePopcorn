@@ -218,7 +218,7 @@ hr {
   display: flex;
   height: 237px;
   background-color: var(--color-fourth);
-  gap: 20px;
+  gap: 25px;
 
 }
 
@@ -230,6 +230,7 @@ hr {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  margin: 12px 0;
   padding: 0;
 }
 

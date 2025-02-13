@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { KEY } from "./KEY";
+import LoadingSpinner from "./LoadingSpinner";
+import StarRating from "./StarRating";
 
 const temp = {
   imdbID: "tt1375666",
@@ -35,8 +37,10 @@ interface MovieDetails {
 }
 export default function MovieDetails({ selectedMovie }: MovieDetailsProps) {
   const [movie, setMovie] = useState<MovieDetails | null>();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     async function getMovie() {
       try {
         if (!selectedMovie) return;
@@ -47,36 +51,43 @@ export default function MovieDetails({ selectedMovie }: MovieDetailsProps) {
         setMovie(data);
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     }
-
     getMovie();
   }, [selectedMovie]);
 
   if (!movie) return null;
   const { Poster, Genre, imdbRating, Title, Runtime, Released } = movie;
-  return (
-    <div className="poster-details">
-      <div className="poster-title">
-        <img src={Poster} alt={Title} />
-        <div className="title-details">
-          <h2>{Title}</h2>
+  return isLoading ? (
+    <LoadingSpinner>Loading...</LoadingSpinner>
+  ) : (
+    <>
+      <div className="poster-details">
+        <div className="poster-title">
+          <img src={Poster} alt={Title} />
+          <div className="title-details">
+            <h2>{Title}</h2>
 
-          <div>
-            <p>{Released}</p>
-            <p>{Runtime}</p>
-          </div>
-          <div>
-            <p>{Genre}</p>
-          </div>
-          <div>
-            <p>⭐ {imdbRating} IMDB Rating</p>
+            <div>
+              <p>{Released}</p>
+              <p>{Runtime}</p>
+            </div>
+            <div>
+              <p>{Genre}</p>
+            </div>
+            <div>
+              <p>⭐ {imdbRating} IMDB Rating</p>
+            </div>
           </div>
         </div>
-      </div>
-      
 
-      
-    </div>
+
+        <div className="star-about">
+          <StarRating />
+        </div>
+      </div>
+    </>
   );
 }

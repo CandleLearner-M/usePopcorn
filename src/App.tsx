@@ -68,7 +68,7 @@ export default function App() {
   const [watchedMovies, setWatchedMovies] = useState<Movie[]>(tempWatchedData);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingMsg, setLoadingMsg] = useState("Loading...");
-  const [selectedMovie, setSelectedMove] = useState<string | null>("tt1375666");
+  const [selectedMovie, setSelectedMovie] = useState<string | null>("tt1375666");
 
   useEffect(() => {
     async function getMovies() {
@@ -129,7 +129,7 @@ export default function App() {
           {isLoading ? (
             <LoadingSpinner>{loadingMsg}</LoadingSpinner>
           ) : (
-            <MoviesList movies={movies} />
+            <MoviesList movies={movies} onMovieClick={setSelectedMovie} />
           )}
         </Box>
         {selectedMovie ? (
