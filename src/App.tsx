@@ -72,6 +72,10 @@ export default function App() {
     setSelectedMovie(selectedId => selectedId === id ? null: id);
   }
 
+  const handleAddWatchedMovie = function (movie: Movie) {
+    setWatchedMovies(watchedMovies => [...watchedMovies, movie]);
+  }
+
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
@@ -89,13 +93,13 @@ export default function App() {
           {isLoading ? (
             <LoadingSpinner>{loadingMsg}</LoadingSpinner>
           ) : (
-            <MoviesList movies={movies} onMovieClick={handleOpenMovie}  />
+            <MoviesList movies={movies} onMovieClick={handleOpenMovie} selectedMovie={selectedMovie} />
           )}
         </Box>
         {selectedMovie ? (
           <Box className="film-list relative">
             {null}
-            <MovieDetails selectedMovie={selectedMovie} onClose={handleClose} />
+            <MovieDetails selectedMovie={selectedMovie} onClose={handleClose}  />
           </Box>
         ) : (
           <Box className="film-list relative">
