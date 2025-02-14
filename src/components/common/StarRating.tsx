@@ -36,10 +36,10 @@ function StarRating({
   size = 30,
   className = "",
   messages = [],
-  setUserRating ,
-  defaultRating = 0
+  setUserRating,
+  defaultRating = 0,
 }: StarRatingProps) {
-  const [rating, setRating] = useState(defaultRating); 
+  const [rating, setRating] = useState(defaultRating);
   const [hoverRating, setHoverRating] = useState(0);
 
   const handleHover = function (num: number) {
@@ -54,7 +54,7 @@ function StarRating({
             key={index}
             onRate={() => {
               setRating(index + 1);
-              setUserRating(rating)
+              setUserRating(index + 1);
             }}
             onHoverIn={() => handleHover(index + 1)}
             onHoverOut={() => handleHover(0)}
