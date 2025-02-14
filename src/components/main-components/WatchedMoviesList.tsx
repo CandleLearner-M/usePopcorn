@@ -14,7 +14,7 @@ function WatchedMovie({ movie }: { movie: Movie }) {
         <img src={Poster} alt={Title} className="poster" />
         <div className="title flex space-between">
           <h3 className="mg-l-0 mg-b-10">{Title}</h3>
-          <ul className="movie row watch-list-info-details gap-20 ">
+          <ul className="watched-film-info">
             <li>
               <span>📅</span>
               <span> {Year}</span>

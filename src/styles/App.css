@@ -265,6 +265,7 @@ hr {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 15px;
 }
 
 .star-about p {
@@ -298,21 +299,25 @@ hr {
   font-size: 20px;
 }
 
-.btn-add {
-}
-
-.btn-movie {
-  margin-top: 15px;
-  display: grid;
-  grid-template-columns: 4fr 1fr;
-  gap: 10px;
-}
-
-.btn-movie button {
+.btn-add-remove {
   background-color: var(--color-thertiary);
   color: var(--text-color);
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
   border: unset;
+}
+
+.btn-add-remove:active {
+  transform: none;
+}
+
+
+.watched-film-info {
+  list-style-type: none;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-left: 0;
 }

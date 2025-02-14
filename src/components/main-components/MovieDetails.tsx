@@ -35,11 +35,14 @@ export default function MovieDetails({
   onClose,
   onAddWatchedMovie,
   onRemoveWatchedMovie,
-  movieIsAdded
+  movieIsAdded,
 }: MovieDetailsProps) {
   const [movie, setMovie] = useState<MovieDetails | null>();
   const [isLoading, setIsLoading] = useState(false);
   const [rating, setRating] = useState(0);
+
+  const isAdded = movieIsAdded(selectedMovie);
+
   useEffect(() => {
     setIsLoading(true);
     async function getMovie() {
@@ -83,6 +86,7 @@ export default function MovieDetails({
       runtime,
       userRating: rating,
     });
+    onClose();
   };
   return isLoading ? (
     <LoadingSpinner>Loading...</LoadingSpinner>
@@ -117,23 +121,16 @@ export default function MovieDetails({
               rating={rating}
               setRating={setRating}
             />
-            <div className="btn-movie">
-              {rating ? (
-                <button
-                  className="btn-add"
-                  onClick={() => {
-                    if (!added) {
-                      handleBtnAdd();
-                    } else {
-                      onClose();
-                    }
-                  }}
-                >
-                  {added ? "+ Add to list" : "Check Watch List"}
-                </button>
-              ) : null}
-              {!added ? <IconButton className="btn-remove" type="minus" onClick={() => onRemoveWatchedMovie(selectedMovie)} />: null }
-            </div>
+            {isAdded ? (
+              <button className="btn-add-remove" onClick={() => {
+                onRemoveWatchedMovie(selectedMovie);
+                onClose();
+              }}>Remove from watch list</button>
+            ) : (
+              <button className="btn-add-remove" onClick={handleBtnAdd}>
+                + Add to list
+              </button>
+            )}
           </div>
 
           <div>

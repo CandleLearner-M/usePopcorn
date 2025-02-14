@@ -84,7 +84,7 @@ export default function App() {
 
   const movieIsAdded = function (id: string | null) {
     if(!id) return false;
-    return movies.some(movie => movie.imdbID === id);
+    return watchedMovies.some(movie => movie.imdbID === id);
   }
 
   useEffect(() => {

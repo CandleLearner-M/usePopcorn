@@ -22,8 +22,8 @@ export default function WatchListInfo({ watchedMovies }: WatchListInfoProps) {
       <h1>Movies you watched</h1>
       <ul className="watch-list-info-details movie row cursor-unset gap-20">
         <li>#️⃣ {watchListLength} movies</li>
-        <li>⭐️ {avgImdbRating.toFixed(2)}s</li>
-        <li>🌟 {avgUserRating.toFixed(2)}</li>
+        <li>⭐️ {avgImdbRating.toFixed(1)}s</li>
+        <li>🌟 {avgUserRating.toFixed(1)}</li>
         <li>⏳ {totalRuntime} min</li>
       </ul>
     </div>
