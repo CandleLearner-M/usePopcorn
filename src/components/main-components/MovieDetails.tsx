@@ -118,15 +118,21 @@ export default function MovieDetails({
             <StarRating
               maxRating={10}
               size={20}
-              rating={rating}
-              setRating={setRating}
+              setUserRating={setRating}
+              defaultRating={isAdded? rating: 0}
             />
-            {isAdded ? (
-              <button className="btn-add-remove" onClick={() => {
-                onRemoveWatchedMovie(selectedMovie);
-                onClose();
-              }}>Remove from watch list</button>
-            ) : (
+            {isAdded && (
+              <button
+                className="btn-add-remove"
+                onClick={() => {
+                  onRemoveWatchedMovie(selectedMovie);
+                  onClose();
+                }}
+              >
+                Remove from watch list
+              </button>
+            )}
+            {!isAdded && rating > 0 && (
               <button className="btn-add-remove" onClick={handleBtnAdd}>
                 + Add to list
               </button>

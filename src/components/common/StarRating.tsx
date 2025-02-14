@@ -27,8 +27,7 @@ interface StarRatingProps {
   className?: string;
   messages?: string[];
   defaultRating?: number;
-  setRating: (rating: number) => void;
-  rating: number;
+  setUserRating: (rating: number) => void;
 }
 
 function StarRating({
@@ -37,9 +36,10 @@ function StarRating({
   size = 30,
   className = "",
   messages = [],
-  rating,
-  setRating,
+  setUserRating ,
+  defaultRating = 0
 }: StarRatingProps) {
+  const [rating, setRating] = useState(defaultRating); 
   const [hoverRating, setHoverRating] = useState(0);
 
   const handleHover = function (num: number) {
@@ -52,7 +52,10 @@ function StarRating({
         {Array.from({ length: maxRating }, (_, index) => (
           <Star
             key={index}
-            onRate={() => setRating(index + 1)}
+            onRate={() => {
+              setRating(index + 1);
+              setUserRating(rating)
+            }}
             onHoverIn={() => handleHover(index + 1)}
             onHoverOut={() => handleHover(0)}
             isFilled={
