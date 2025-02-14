@@ -38,7 +38,7 @@ function StarRating({
   className = "",
   messages = [],
   rating,
-  setRating
+  setRating,
 }: StarRatingProps) {
   const [hoverRating, setHoverRating] = useState(0);
 
@@ -63,7 +63,7 @@ function StarRating({
       </div>
       <p style={{ ...textStyle, color, fontSize: `${size}px` }}>
         {messages.length === maxRating
-          ? messages[hoverRating - 1] || messages[rating - 1 ]
+          ? messages[hoverRating - 1] || messages[rating - 1]
           : hoverRating || rating || ""}
       </p>
     </div>
