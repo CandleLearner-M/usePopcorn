@@ -14,17 +14,17 @@ export default function WatchListInfo({ watchedMovies }: WatchListInfoProps) {
   const avgUserRating = average(watchedMovies.map((movie) => movie.userRating));
   const avgImdbRating = average(watchedMovies.map((movie) => movie.imdbRating));
   const totalRuntime = watchedMovies.reduce((acc, movie) => {
-    if (!movie || !movie.runtime) return;
-    return acc + (parseFloat(movie?.runtime) || 0);
+    if (movie && movie.runtime) return acc + (parseFloat(movie?.runtime) || 0);
+    else return acc + 0;
   }, 0);
   return (
     <div className="watch-list-details">
       <h1>Movies you watched</h1>
       <ul className="watch-list-info-details movie row cursor-unset gap-20">
         <li>#️⃣ {watchListLength} movies</li>
-        <li>⭐️ {avgImdbRating}s</li>
-        <li>🌟 {avgUserRating}</li>
-        <li>⏳ {totalRuntime}</li>
+        <li>⭐️ {avgImdbRating.toFixed(2)}s</li>
+        <li>🌟 {avgUserRating.toFixed(2)}</li>
+        <li>⏳ {totalRuntime} min</li>
       </ul>
     </div>
   );

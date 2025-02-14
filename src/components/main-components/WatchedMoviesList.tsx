@@ -7,7 +7,7 @@ export default function WatchedMoviesList({ watchedMovies }: { watchedMovies: Mo
   ));
 }
 function WatchedMovie({ movie }: { movie: Movie }) {
-  const { imdbID, Title, Poster, runtime, imdbRating, userRating } = movie;
+  const { imdbID, Title, Poster, runtime, imdbRating, userRating, Year } = movie;
   return (
     <Fragment key={imdbID}>
       <div className="movie row gap-20">
@@ -16,8 +16,8 @@ function WatchedMovie({ movie }: { movie: Movie }) {
           <h3 className="mg-l-0 mg-b-10">{Title}</h3>
           <ul className="movie row watch-list-info-details gap-20 ">
             <li>
-              <span>⏳</span>
-              <span> {runtime}</span>
+              <span>📅</span>
+              <span> {Year}</span>
             </li>
             <li>
               <span>🌟</span>
@@ -26,6 +26,10 @@ function WatchedMovie({ movie }: { movie: Movie }) {
             <li>
               <span>⭐️</span>
               <span>{userRating}</span>
+            </li>
+            <li>
+              <span>⌛</span>
+              <span>{runtime}</span>
             </li>
           </ul>
         </div>

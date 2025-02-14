@@ -265,7 +265,6 @@ hr {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 15px;
 }
 
 .star-about p {
@@ -285,14 +284,13 @@ hr {
   font-size: 16px;
 }
 
-
 .watch-list-details {
   display: flex;
   flex-direction: column;
   padding: 12px 25px;
   padding-bottom: 15px;
   background-color: var(--color-fourth);
-  border-radius: 8px 8px 0 0 ;
+  border-radius: 8px 8px 0 0;
 }
 
 .watch-list-details h1 {
@@ -301,9 +299,20 @@ hr {
 }
 
 .btn-add {
-  background-color: var(--color-thertiary);;
+}
+
+.btn-movie {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  gap: 10px;
+}
+
+.btn-movie button {
+  background-color: var(--color-thertiary);
   color: var(--text-color);
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
+  border: unset;
 }

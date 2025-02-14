@@ -4,6 +4,6 @@ export type Movie = {
   Year: string;
   Poster: string;
   runtime?: string;
-  imdbRating?: number | string;
+  imdbRating?: number;
   userRating?: number;
 };

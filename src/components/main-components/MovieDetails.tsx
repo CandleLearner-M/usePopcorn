@@ -9,6 +9,8 @@ type MovieDetailsProps = {
   selectedMovie: string;
   onClose: () => void;
   onAddWatchedMovie: (movie: Movie) => void;
+  onRemoveWatchedMovie: (id: string) => void;
+  movieIsAdded: (id: string | null) => boolean;
 };
 
 interface MovieDetails {
@@ -32,11 +34,12 @@ export default function MovieDetails({
   selectedMovie,
   onClose,
   onAddWatchedMovie,
+  onRemoveWatchedMovie,
+  movieIsAdded
 }: MovieDetailsProps) {
   const [movie, setMovie] = useState<MovieDetails | null>();
   const [isLoading, setIsLoading] = useState(false);
   const [rating, setRating] = useState(0);
-
   useEffect(() => {
     setIsLoading(true);
     async function getMovie() {
@@ -67,7 +70,7 @@ export default function MovieDetails({
     Plot: plot,
     Actors: actors,
     Director: director,
-    Year
+    Year,
   } = movie;
 
   const handleBtnAdd = function () {
@@ -76,7 +79,7 @@ export default function MovieDetails({
       imdbID: selectedMovie,
       Poster: poster,
       Year,
-      imdbRating,
+      imdbRating: parseFloat(imdbRating) || 0,
       runtime,
       userRating: rating,
     });
@@ -114,7 +117,23 @@ export default function MovieDetails({
               rating={rating}
               setRating={setRating}
             />
-            <button className="btn-add" onClick={handleBtnAdd}>+ Add to list</button>
+            <div className="btn-movie">
+              {rating ? (
+                <button
+                  className="btn-add"
+                  onClick={() => {
+                    if (!added) {
+                      handleBtnAdd();
+                    } else {
+                      onClose();
+                    }
+                  }}
+                >
+                  {added ? "+ Add to list" : "Check Watch List"}
+                </button>
+              ) : null}
+              {!added ? <IconButton className="btn-remove" type="minus" onClick={() => onRemoveWatchedMovie(selectedMovie)} />: null }
+            </div>
           </div>
 
           <div>

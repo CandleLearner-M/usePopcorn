@@ -76,6 +76,17 @@ export default function App() {
     setWatchedMovies((watchedMovies) => [...watchedMovies, movie]);
   };
 
+  const handleRemoveWatchedMovie = function (id: string) {
+    setWatchedMovies((watchedMovies) =>
+      watchedMovies.filter((movie) => movie.imdbID !== id)
+    );
+  };
+
+  const movieIsAdded = function (id: string | null) {
+    if(!id) return false;
+    return movies.some(movie => movie.imdbID === id);
+  }
+
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
@@ -107,6 +118,8 @@ export default function App() {
               selectedMovie={selectedMovie}
               onClose={handleClose}
               onAddWatchedMovie={handleAddWatchedMovie}
+              onRemoveWatchedMovie={handleRemoveWatchedMovie}
+              movieIsAdded={movieIsAdded}
             />
           </Box>
         ) : (
