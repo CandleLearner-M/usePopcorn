@@ -128,6 +128,7 @@
                 setUserRating={setRating}
                 defaultRating={rating}
               />
+
               {isAdded && (
                 <button
                   className="btn-add-remove"
@@ -139,12 +140,14 @@
                   Remove from watch list
                 </button>
               )}
+
               {!isAdded && rating > 0 && (
                 <button className="btn-add-remove" onClick={handleBtnAdd}>
                   + Add to list
                 </button>
               )}
             </div>
+ 
             <div>
               <p>
                 <em>{plot}</em>
