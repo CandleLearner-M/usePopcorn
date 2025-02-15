@@ -24,12 +24,14 @@ export default function App() {
   const [selectedMovie, setSelectedMovie] = useState<string | null>(null);
 
   useEffect(() => {
+    const controller = new AbortController()
     async function getMovies() {
       setIsLoading(true);
       setLoadingMsg("Loading...");
       try {
         const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${KEY}&s=${searchQuery}`
+          `http://www.omdbapi.com/?apikey=${KEY}&s=${searchQuery}`,
+          {signal: controller.signal}
         );
 
         if (!res.ok)
@@ -58,6 +60,10 @@ export default function App() {
       return;
     }
     getMovies();
+
+    return () => {
+      controller.abort();
+    }
   }, [searchQuery]);
 
   const toggleTheme = function () {
