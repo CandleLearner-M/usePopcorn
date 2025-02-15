@@ -70,7 +70,8 @@ export default function MovieDetails({
   }, [selectedMovie]);
 
   useEffect(() => {
-    document.title = selectedMovie ? `Movie | ${movie?.Title || ''}` : "usePopcorn";
+    if (!movie?.Title) return;
+    document.title = selectedMovie ? `Movie | ${movie.Title}` : "usePopcorn";
     return () => {
       document.title = "usePopcorn";
     };
