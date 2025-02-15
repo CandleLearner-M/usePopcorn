@@ -149,7 +149,6 @@
               <p>
                 <em>{plot}</em>
               </p>
-
               <p>Starring {actors}</p>
               <p>Directed by {director}</p>
             </div>
