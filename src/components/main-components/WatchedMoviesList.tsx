@@ -12,6 +12,7 @@ function WatchedMovie({ movie }: { movie: Movie }) {
   return (
     <Fragment key={imdbID}>
       <div className="movie row gap-20 relative">
+        <button className="btn-remove">x</button>
         <img src={Poster} alt={Title} className="poster" />
         <div className="title flex space-between">
           <h3 className="mg-l-0 mg-b-10">{Title}</h3>
