@@ -321,3 +321,12 @@ hr {
   gap: 2rem;
   padding-left: 0;
 }
+
+.btn-remove {
+  font-size: 20px;
+  background-color: red;
+  color: var(--text-color);
+  position: absolute;
+  right: 5px;
+  top: 50%;
+}
