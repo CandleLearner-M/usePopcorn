@@ -4,9 +4,11 @@ import { Movie } from "./../common/types";
 export default function WatchedMoviesList({
   watchedMovies,
   onDeleteMovie,
+  onOpenMovie
 }: {
   watchedMovies: Movie[];
   onDeleteMovie: (id: string) => void;
+  onOpenMovie: (id: string | null) => void
 }) {
   return watchedMovies.map((movie) => (
     <WatchedMovie
@@ -16,6 +18,8 @@ export default function WatchedMoviesList({
     />
   ));
 }
+
+
 function WatchedMovie({
   movie,
   onDeleteMovie,

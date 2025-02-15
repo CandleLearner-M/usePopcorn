@@ -325,7 +325,7 @@ hr {
 .btn-remove {
   font-size: 12px;
   background-color: red;
-  color: var(--text-color);
+  color: white;
   position: absolute;
   right: 5px;
   top: 40%;
