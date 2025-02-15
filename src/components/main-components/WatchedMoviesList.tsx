@@ -15,6 +15,7 @@ export default function WatchedMoviesList({
       key={movie.imdbID}
       movie={movie}
       onDeleteMovie={onDeleteMovie}
+      onOpenMovie={onOpenMovie}
     />
   ));
 }
@@ -23,15 +24,17 @@ export default function WatchedMoviesList({
 function WatchedMovie({
   movie,
   onDeleteMovie,
+  onOpenMovie
 }: {
   movie: Movie;
   onDeleteMovie: (id: string) => void;
+  onOpenMovie:(id: string | null) => void;
 }) {
   const { imdbID, Title, Poster, runtime, imdbRating, userRating, Year } =
     movie;
   return (
     <Fragment key={imdbID}>
-      <div className="movie row gap-20 relative">
+      <div className="movie row gap-20 relative" onClick={()=> onOpenMovie(imdbID)}>
         <button className="btn-remove" onClick={() => onDeleteMovie(imdbID)}>
           x
         </button>
