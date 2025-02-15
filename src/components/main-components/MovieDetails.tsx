@@ -145,7 +145,6 @@
                 </button>
               )}
             </div>
-
             <div>
               <p>
                 <em>{plot}</em>
