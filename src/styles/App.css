@@ -323,10 +323,14 @@ hr {
 }
 
 .btn-remove {
-  font-size: 20px;
+  font-size: 12px;
   background-color: red;
   color: var(--text-color);
   position: absolute;
   right: 5px;
-  top: 50%;
+  top: 40%;
+  border: unset;
+  outline: unset;
+  cursor: pointer;
+  border-radius: 50%;
 }
