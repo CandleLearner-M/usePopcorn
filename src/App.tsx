@@ -125,7 +125,7 @@ export default function App() {
         ) : (
           <Box className="film-list relative">
             <WatchListInfo watchedMovies={watchedMovies} />
-            <WatchedMoviesList watchedMovies={watchedMovies} />
+            <WatchedMoviesList watchedMovies={watchedMovies} onDeleteMovie={handleRemoveWatchedMovie} />
           </Box>
         )}
       </Main>
