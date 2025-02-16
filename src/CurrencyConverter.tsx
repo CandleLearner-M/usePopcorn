@@ -6,13 +6,14 @@ export default function CurrencyConverter() {
   const [amount, setAmount] = useState<string | number>("");
   const [from, setFrom] = useState<Currency>("INR");
   const [to, setTo] = useState<Currency>("USD");
-  const [result, setResult] = useState<number | string>("");
+  const [result, setResult] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const convertionResult = async () => {
       try {
         if (!amount) return;
-        setResult("Processing...");
+        setIsLoading(true)
         const res = await fetch(
           ` https://api.frankfurter.app/latest?amount=${amount}&from=${from}&to=${to}`
         );
@@ -20,6 +21,7 @@ export default function CurrencyConverter() {
         const data = await res.json();
 
         setResult(data.rates[to]);
+        setIsLoading(false)
       } catch (error) {
         console.error(error);
       }
@@ -57,7 +59,7 @@ export default function CurrencyConverter() {
         <option value="INR">INR</option>
         <option value="CAD">CAD</option>
       </select>
-      <p>{result}</p>
+      <p>{isLoading ? 'Processing...' : result}</p>
     </div>
   );
 }
