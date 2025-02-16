@@ -1,25 +1,27 @@
 import { useEffect, useState } from "react";
 
-type Currency = "EUR" | "MAD" | "USD" | "CAD";
+type Currency = "EUR" | "INR" | "USD" | "CAD";
 
 export default function CurrencyConverter() {
   const [amount, setAmount] = useState<string | number>("");
-  const [from, setFrom] = useState<Currency>("MAD");
+  const [from, setFrom] = useState<Currency>("INR");
   const [to, setTo] = useState<Currency>("USD");
+  const [result, setResult] = useState<number | string>("");
 
   useEffect(() => {
     const convertionResult = async () => {
       try {
         if (!amount) return;
+        setResult("Processing...");
         const res = await fetch(
           ` https://api.frankfurter.app/latest?amount=${amount}&from=${from}&to=${to}`
         );
+        if (!res.ok) throw new Error();
         const data = await res.json();
 
-        console.log(data);
-
+        setResult(data.rates[to]);
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
     };
 
@@ -41,7 +43,7 @@ export default function CurrencyConverter() {
       >
         <option value="EUR">Euro</option>
         <option value="USD">Dollar</option>
-        <option value="MAD">MAD</option>
+        <option value="INR">INR</option>
         <option value="CAD">CAD</option>
       </select>
       <select
@@ -52,10 +54,10 @@ export default function CurrencyConverter() {
       >
         <option value="EUR">Euro</option>
         <option value="USD">Dollar</option>
-        <option value="MAD">MAD</option>
+        <option value="INR">INR</option>
         <option value="CAD">CAD</option>
       </select>
-      <p>Output</p>
+      <p>{result}</p>
     </div>
   );
 }
