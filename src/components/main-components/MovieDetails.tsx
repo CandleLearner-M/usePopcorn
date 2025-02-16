@@ -70,6 +70,19 @@ export default function MovieDetails({
   }, [selectedMovie]);
 
   useEffect(() => {
+    const closeOnEscape = (e: KeyboardEvent) => {
+      if (e.code === "Escape") onClose();
+      console.log(e);
+    };
+
+    document.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [onClose]);
+
+  useEffect(() => {
     if (!movie?.Title) return;
     document.title = selectedMovie ? `Movie | ${movie.Title}` : "usePopcorn";
     return () => {

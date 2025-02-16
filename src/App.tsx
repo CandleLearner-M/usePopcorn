@@ -24,14 +24,14 @@ export default function App() {
   const [selectedMovie, setSelectedMovie] = useState<string | null>(null);
 
   useEffect(() => {
-    const controller = new AbortController()
+    const controller = new AbortController();
     async function getMovies() {
       setIsLoading(true);
       setLoadingMsg("Loading...");
       try {
         const res = await fetch(
           `http://www.omdbapi.com/?apikey=${KEY}&s=${searchQuery}`,
-          {signal: controller.signal}
+          { signal: controller.signal }
         );
 
         if (!res.ok)
@@ -43,11 +43,11 @@ export default function App() {
           return;
         }
         setMovies(data.Search);
-        console.log(data.Search);
         setIsLoading(false);
+        setLoadingMsg("");
       } catch (error) {
         if (error instanceof Error) {
-          setLoadingMsg(error.message);
+          if (error.name !== "AbortError") setLoadingMsg(error.message);
         } else {
           setLoadingMsg("An unkown error occured");
         }
@@ -63,7 +63,7 @@ export default function App() {
 
     return () => {
       controller.abort();
-    }
+    };
   }, [searchQuery]);
 
   const toggleTheme = function () {
@@ -89,13 +89,15 @@ export default function App() {
   };
 
   const movieIsAdded = function (id: string | null) {
-    if(!id) return;
-    return watchedMovies.find(movie => movie.imdbID === id);
-  }
+    if (!id) return;
+    return watchedMovies.find((movie) => movie.imdbID === id);
+  };
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
+
+ 
 
   return (
     <>
@@ -131,7 +133,11 @@ export default function App() {
         ) : (
           <Box className="film-list relative">
             <WatchListInfo watchedMovies={watchedMovies} />
-            <WatchedMoviesList watchedMovies={watchedMovies} onDeleteMovie={handleRemoveWatchedMovie} onOpenMovie={handleOpenMovie} />
+            <WatchedMoviesList
+              watchedMovies={watchedMovies}
+              onDeleteMovie={handleRemoveWatchedMovie}
+              onOpenMovie={handleOpenMovie}
+            />
           </Box>
         )}
       </Main>
