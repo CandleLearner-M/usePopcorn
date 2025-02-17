@@ -27,6 +27,7 @@ export default function CurrencyConverter() {
       }
     };
 
+    if (to === from) return  setResult(amount as number);
     convertionResult();
   }, [amount, from, to]);
 
@@ -36,10 +37,12 @@ export default function CurrencyConverter() {
         type="text"
         value={amount}
         onChange={(e) => setAmount(+e.target.value)}
+        disabled={isLoading}
       />
       <select
         name="from"
         id="from"
+        disabled={isLoading}
         value={from}
         onChange={(e) => setFrom(e.target.value as Currency)}
       >
@@ -53,6 +56,7 @@ export default function CurrencyConverter() {
         id="to"
         value={to}
         onChange={(e) => setTo(e.target.value as Currency)}
+        disabled={isLoading}
       >
         <option value="EUR">Euro</option>
         <option value="USD">Dollar</option>
