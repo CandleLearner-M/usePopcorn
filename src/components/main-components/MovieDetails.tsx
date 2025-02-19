@@ -120,7 +120,6 @@ export default function MovieDetails({
       imdbRating: parseFloat(imdbRating) || 0,
       runtime,
       userRating: rating,
-      count: countRef,
     });
     onClose();
   };
