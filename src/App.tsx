@@ -1,18 +1,25 @@
+// React Dependencies
+import { useEffect, useState } from "react";
+
+// Styles
 import "./styles/App.css";
+
+// Common
+import { Movie } from "./components/common/types";
+import LoadingSpinner from "./components/common/LoadingSpinner";
+import { useMovie } from "./components/common/useMovie";
+
+// Components
 import Main from "./components/layout/Main.1";
 import { NavBar } from "./components/layout/NavBar";
-import { useEffect, useState } from "react";
-import { Movie } from "./components/common/types";
 import { SearchForm } from "./components/NavBar-components/SearchForm";
 import { NumResults } from "./components/NavBar-components/NumResults";
 import Box from "./components/main-components/Box";
 import MoviesList from "./components/main-components/MoviesList";
 import WatchListInfo from "./components/main-components/WatchListInfo";
 import WatchedMoviesList from "./components/main-components/WatchedMoviesList";
-import LoadingSpinner from "./components/common/LoadingSpinner";
 import MovieDetails from "./components/main-components/MovieDetails";
 import Logo from "./components/NavBar-components/Logo";
-import { useMovie } from "./components/common/useMovie";
 
 export default function App() {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
