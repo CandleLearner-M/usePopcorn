@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { KEY } from "../common/KEY";
 import LoadingSpinner from "../common/LoadingSpinner";
 import StarRating from "../common/StarRating";
@@ -44,6 +44,12 @@ export default function MovieDetails({
   const [movie, setMovie] = useState<MovieDetails | null>();
   const [isLoading, setIsLoading] = useState(false);
   const [rating, setRating] = useState(userRate);
+
+  const countRef = useRef(0);
+
+  useEffect(() => {
+    if (rating) countRef.current++;
+  }, [rating]);
 
   useEffect(() => {
     const currentMovie = movieIsAdded(selectedMovie);
@@ -114,6 +120,7 @@ export default function MovieDetails({
       imdbRating: parseFloat(imdbRating) || 0,
       runtime,
       userRating: rating,
+      count: countRef,
     });
     onClose();
   };
