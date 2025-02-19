@@ -4,6 +4,7 @@ import LoadingSpinner from "../common/LoadingSpinner";
 import StarRating from "../common/StarRating";
 import IconButton from "../common/Buttons";
 import { Movie } from "../common/types";
+import { useKey } from "../common/useKey";
 
 type MovieDetailsProps = {
   selectedMovie: string;
@@ -75,26 +76,17 @@ export default function MovieDetails({
     getMovie();
   }, [selectedMovie]);
 
-  useEffect(() => {
-    const closeOnEscape = (e: KeyboardEvent) => {
-      if (e.code === "Escape") onClose();
-      console.log(e);
-    };
 
-    document.addEventListener("keydown", closeOnEscape);
 
-    return () => {
-      document.removeEventListener("keydown", closeOnEscape);
-    };
-  }, [onClose]);
+  useKey(closeOnEscape);
 
-  useEffect(() => {
-    if (!movie?.Title) return;
-    document.title = selectedMovie ? `Movie | ${movie.Title}` : "usePopcorn";
-    return () => {
-      document.title = "usePopcorn";
-    };
-  }, [movie, selectedMovie]);
+     useEffect(() => {
+     if (!movie?.Title) return;
+     document.title = selectedMovie ? `Movie | ${movie.Title}` : "usePopcorn";
+     return () => {
+       document.title = "usePopcorn";
+     };
+   }, [movie, selectedMovie]);
 
   if (!movie) return null;
 
