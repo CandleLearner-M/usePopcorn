@@ -18,10 +18,19 @@ export default function App() {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [movies, setMovies] = useState<Movie[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [watchedMovies, setWatchedMovies] = useState<Movie[]>([]);
+  const [watchedMovies, setWatchedMovies] = useState<Movie[]>(() => {
+    const watchedMovs = JSON.parse(
+      window.localStorage.getItem("watchedMovies") || ""
+    );
+    return watchedMovs ?? [];
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [loadingMsg, setLoadingMsg] = useState("Loading...");
   const [selectedMovie, setSelectedMovie] = useState<string | null>(null);
+
+  useEffect(() => {
+    window.localStorage.setItem("watchedMovies", JSON.stringify(watchedMovies));
+  }, [watchedMovies]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -96,8 +105,6 @@ export default function App() {
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
-
- 
 
   return (
     <>
