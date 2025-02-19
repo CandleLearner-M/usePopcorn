@@ -8,12 +8,22 @@ export function SearchForm({ searchQuery, setSearchQuery }: SearchFormProps) {
   const inputEl = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    console.log(inputEl.current)
     inputEl.current?.focus();
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    const enterPressHandler = function (e: KeyboardEvent) {
+      if (document.activeElement === inputEl.current) return;
+      if (e.key !== "Enter") return;
+      setSearchQuery("");
+      inputEl.current?.focus();
+    };
+    document.addEventListener("keydown", enterPressHandler);
+    return () => document.removeEventListener("keydown", enterPressHandler);
+  }, [setSearchQuery]);
 
   return (
-    <form role="search" className="search-form">
+    <form onSubmit={(e) => e.preventDefault()} className="search-form">
       <input
         type="search"
         name="searchMovie"
