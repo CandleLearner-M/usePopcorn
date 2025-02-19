@@ -76,17 +76,14 @@ export default function MovieDetails({
     getMovie();
   }, [selectedMovie]);
 
-
-
-  useKey(closeOnEscape);
-
-     useEffect(() => {
-     if (!movie?.Title) return;
-     document.title = selectedMovie ? `Movie | ${movie.Title}` : "usePopcorn";
-     return () => {
-       document.title = "usePopcorn";
-     };
-   }, [movie, selectedMovie]);
+  useKey(onClose, "Escape");
+  useEffect(() => {
+    if (!movie?.Title) return;
+    document.title = selectedMovie ? `Movie | ${movie.Title}` : "usePopcorn";
+    return () => {
+      document.title = "usePopcorn";
+    };
+  }, [movie, selectedMovie]);
 
   if (!movie) return null;
 
