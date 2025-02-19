@@ -31,18 +31,19 @@ body {
   align-items: center;
   background-color: var(--color-thertiary);
   color: var(--text-color);
-  margin: 10px 15px;
-  padding: 0 30px;
+  margin: 3px 5px;
+  padding: 0 0.8rem;
+  gap: 1rem;
   border-radius: 8px;
   box-shadow: 0 0 10px var(--shadow-color);
 }
 
 .navbar h1 {
-  font-size: 1.5rem;
+  font-size: 0.9rem;
 }
 
 .navbar form input {
-  padding: 9px;
+  padding: 0.4rem;
   background-color: var(--color-secondary);
   border-radius: 5px;
   color: var(--text-color);
@@ -50,6 +51,16 @@ body {
   margin: 0 10px;
   border: unset;
   outline: none;
+}
+
+@media screen and (min-width: 798px) {
+  .navbar h1 {
+    font-size: 1.5rem;
+  }
+  .navbar {
+    padding: 0 2rem;
+    margin: 10px 15px;
+  }
 }
 
 .navbar span {
@@ -311,7 +322,6 @@ hr {
 .btn-add-remove:active {
   transform: none;
 }
-
 
 .watched-film-info {
   list-style-type: none;
