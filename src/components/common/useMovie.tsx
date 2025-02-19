@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Movie } from "../common/types";
-import { KEY } from "../common/KEY";
+import { Movie } from "./types";
+import { KEY } from "./KEY";
 
 export function useMovie(searchQuery: string) {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -49,6 +49,5 @@ export function useMovie(searchQuery: string) {
     };
   }, [searchQuery]);
 
-
-  return {movies, isLoading, loadingMsg}
+  return { movies, isLoading, loadingMsg };
 }

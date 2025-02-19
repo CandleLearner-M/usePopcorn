@@ -12,7 +12,7 @@ import WatchedMoviesList from "./components/main-components/WatchedMoviesList";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import MovieDetails from "./components/main-components/MovieDetails";
 import Logo from "./components/NavBar-components/Logo";
-import { useMovie } from "./components/main-components/useMovie";
+import { useMovie } from "./components/common/useMovie";
 
 export default function App() {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
@@ -25,8 +25,7 @@ export default function App() {
   });
   const [selectedMovie, setSelectedMovie] = useState<string | null>(null);
 
-  const {isLoading, loadingMsg, movies} = useMovie(searchQuery);
-
+  const { isLoading, loadingMsg, movies } = useMovie(searchQuery);
 
   useEffect(() => {
     window.localStorage.setItem("watchedMovies", JSON.stringify(watchedMovies));
