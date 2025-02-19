@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useKey } from "../common/useKey";
 
 type SearchFormProps = {
   searchQuery: string;
@@ -11,16 +12,12 @@ export function SearchForm({ searchQuery, setSearchQuery }: SearchFormProps) {
     inputEl.current?.focus();
   }, []);
 
-  useEffect(() => {
-    const enterPressHandler = function (e: KeyboardEvent) {
-      if (document.activeElement === inputEl.current) return;
-      if (e.key !== "Enter") return;
-      setSearchQuery("");
-      inputEl.current?.focus();
-    };
-    document.addEventListener("keydown", enterPressHandler);
-    return () => document.removeEventListener("keydown", enterPressHandler);
-  }, [setSearchQuery]);
+  const onEnter = function () {
+    if (document.activeElement === inputEl.current) return;
+    setSearchQuery("");
+    inputEl.current?.focus();
+  };
+  useKey(onEnter, "enter");
 
   return (
     <form onSubmit={(e) => e.preventDefault()} className="search-form">
